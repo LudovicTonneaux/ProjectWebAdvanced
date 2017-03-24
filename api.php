@@ -13,6 +13,7 @@ $requestBody = file_get_contents('php://input');
 
 if ($method == 'GET'){
     if (isset($pathSegments[3])){
-        //... rest invullen
+        $eventID = $pathSegments[3];
+
     }
 }
