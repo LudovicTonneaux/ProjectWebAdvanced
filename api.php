@@ -2955,6 +2955,7 @@ class PHP_CRUD_API
     }
 }
 
+<<<<<<< HEAD
 // require 'auth.php'; // from the PHP-API-AUTH project, see: https://github.com/mevdschee/php-api-auth
 
 // uncomment the lines below for token+session based authentication (see "login_token.html" + "login_token.php"):
@@ -3022,3 +3023,14 @@ $api->executeCommand();
 // 	'database'=>'data/blog.db',
 // ));
 // $api->executeCommand();
+=======
+ $api = new PHP_CRUD_API(array(
+ 	'dbengine'=>'MySQL',
+ 	'hostname'=>'localhost',
+ 	'username'=>'pxluser',
+ 	'password'=>'KKRuA3YFxIeQw!',
+ 	'database'=>'projectWeb',
+ 	'charset'=>'utf8'
+ ));
+ $api->executeCommand();
+>>>>>>> origin/master
