@@ -20,7 +20,7 @@ class PDOPersonRepository implements PersonRepository
             $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             if (count($results) > 0) {
-                return new Person($results[0]['id'], $results[0]['name']);
+                return new Events($results[0]['id'], $results[0]['name']);
             } else {
                 return null;
             }
