@@ -6,9 +6,12 @@
  * Time: 10:35
  */
 require_once 'src/autoload.php';
-//use \controller\...;
-//use \model\...;
-//use \view\...;
+use \controller\PersonController;
+use \controller\EventsController;
+use \model\PDOPersonRepository;
+use \model\PDOEventRepository;
+use \view\PersonJsonView;
+use \view\EventJsonView;
 
 $user = 'pxluser';
 $password = 'KKRuA3YFxIeQw!';
@@ -21,12 +24,16 @@ try{
     $pdo->setAttribute(PDO::ATTR_ERRMODE,
                         PDO::ERRMODE_EXCEPTION);
 
-    //$personPDORepository = new PDOPersonRepository($pdo);
-    //$personJsonView = new PersonJsonView();
-    //$personController = new PersonController($personPDORepository, $personJsonView);
+    $personPDORepository = new PDOPersonRepository($pdo);
+    $eventPDORepository = new PDOEventRepository($pdo);
+    $personJsonView = new PersonJsonView();
+    $eventJsonView = new EventJsonView();
+    $personController = new PersonController($personPDORepository, $personJsonView);
+    $eventController = new EventsController($eventPDORepository, $eventJsonView);
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
-    //$personController->handleFindPersonById($id);
+    $personController->handleFindPersonById($id);
+    $eventController->handleFindEventById($id);
 }catch (Exception $e){
     echo 'Cannot connect to the database!';
 }
