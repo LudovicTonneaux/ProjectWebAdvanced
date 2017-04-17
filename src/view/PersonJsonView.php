@@ -8,9 +8,9 @@ class PersonJsonView implements View
     {
         header('Content-Type: application/json');
 
-        if (isset($data['person'])) {
-            $person = $data['person'];
-            echo json_encode(['id' => $person->getId(), 'name' => $person->getName()]);
+        if (isset($data['persoon'])) {
+            $persoon = $data['persoon'];
+            echo json_encode(['persoonId' => $persoon->getId(), 'naam' => $persoon->getName()]);
         } else {
             echo '{}';
         }

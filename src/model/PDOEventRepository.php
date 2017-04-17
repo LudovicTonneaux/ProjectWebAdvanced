@@ -2,7 +2,7 @@
 
 namespace model;
 
-class PDOPersonRepository implements PersonRepository
+class PDOEventRepository implements EventsRepository
 {
     private $connection = null;
 
@@ -11,16 +11,16 @@ class PDOPersonRepository implements PersonRepository
         $this->connection = $connection;
     }
 
-    public function findPersonById($id )
+    public function findEventById($id )
     {
         try {
-            $statement = $this->connection->prepare('SELECT * FROM persoon WHERE persoonId=?');
+            $statement = $this->connection->prepare('SELECT * FROM events WHERE eventId=?');
             $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->execute();
             $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             if (count($results) > 0) {
-                return new Events($results[0]['persoonId'], $results[0]['naam']);
+                return new Events($results[0]['eventId'], $results[0]['datum']);
             } else {
                 return null;
             }

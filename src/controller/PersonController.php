@@ -18,7 +18,7 @@ class PersonController
 
     public function handleFindPersonById($id = null)
     {
-        $person = $this->personRepository->findPersonById($id);
-        $this->view->show(['person' => $person]);
+        $persoon = $this->personRepository->findPersonById($id);
+        $this->view->show(['persoon' => $persoon]);
     }
 }
