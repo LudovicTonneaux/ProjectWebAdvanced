@@ -35,8 +35,8 @@ class PersonControllerTest extends \PHPUnit\Framework\TestCase
         $this->mockView->expects($this->atLeastOnce())
             ->method('show')
             ->will($this->returnCallback(function ($object){
-                $person = $object['person'];
-                printf('%d %d %s', $person->getId(), $person->getPersonId(), $person->getDate());
+                $person = $object['persoon'];
+                printf('%d %d %s', $person->getId(), $person->getEventsId(), $person->getName());
             }));
 
         $personController = new PersonController($this->mockPersonRepository, $this->mockView);
