@@ -1,0 +1,11 @@
+curl -s "https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh" | sudo bash
+
+sudo apt-get install php5-phalcon
+
+sudo apt-get install php7.0-phalcon
+
+sudo nano /etc/php/7.0/apache2/php.ini
+    -> extension=phalcon.so
+    -> op het einde toevoegen
+
+sudo service apache2 restart
