@@ -21,4 +21,16 @@ class EventsController
         $event = $this->eventsRepository->findEventById($id);
         $this->view->show(['events' => $event]);
     }
+
+    public function handleFindEventByPersonId($personId = null)
+    {
+        $event = $this->eventsRepository->findEventById($personId);
+        $this->view->show(['events' => $event]);
+    }
+
+    public function handleFindEventByDate($date = null)
+    {
+        $event = $this->eventsRepository->findEventById($date);
+        $this->view->show(['events' => $event]);
+    }
 }

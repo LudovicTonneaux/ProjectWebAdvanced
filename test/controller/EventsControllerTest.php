@@ -34,13 +34,53 @@ class EventsControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->mockView->expects($this->atLeastOnce())
             ->method('show')
-            ->will($this->returnCallback(function ($object){
+            ->will($this->returnCallback(function ($object) {
                 $events = $object['events'];
                 printf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate());
             }));
 
         $eventsController = new EventsController($this->mockEventsRepository, $this->mockView);
         $eventsController->handleFindEventById($events->getId());
+        $this->expectOutputString(sprintf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate()));
+    }
+
+    /** @test */
+    public function TestHandleFindEventByPersonId_eventFound_byPerson($personId = null)
+    {
+        $events = new Events(9, 2, 2017 - 12 - 12);
+        $this->mockEventsRepository->expects($this->atLeastOnce())
+            ->method('findEventById')
+            ->will($this->returnValue($events));
+
+        $this->mockView->expects($this->atLeastOnce())
+            ->method('show')
+            ->will($this->returnCallback(function ($object) {
+                $events = $object['events'];
+                printf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate());
+            }));
+
+        $eventsController = new EventsController($this->mockEventsRepository, $this->mockView);
+        $eventsController->handleFindEventByPersonId($events->getPersonId());
+        $this->expectOutputString(sprintf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate()));
+    }
+
+    /** @test */
+    public function TestHandleFindEventByDate_eventFound_byDate($date = null)
+    {
+        $events = new Events(9, 2, 2017 - 12 - 12);
+        $this->mockEventsRepository->expects($this->atLeastOnce())
+            ->method('findEventById')
+            ->will($this->returnValue($events));
+
+        $this->mockView->expects($this->atLeastOnce())
+            ->method('show')
+            ->will($this->returnCallback(function ($object) {
+                $events = $object['events'];
+                printf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate());
+            }));
+
+        $eventsController = new EventsController($this->mockEventsRepository, $this->mockView);
+        $eventsController->handleFindEventByPersonId($events->getDate());
         $this->expectOutputString(sprintf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate()));
     }
 }
