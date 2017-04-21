@@ -2,9 +2,9 @@
 
 namespace model;
 
-interface EventsRepository
+interface PersonRepository
 {
-    public function findEventById($id);
+    public function findPersonById($id);
     /*
     public function findEvents();
     public function add(Events $event);

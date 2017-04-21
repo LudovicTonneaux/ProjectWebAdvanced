@@ -1,0 +1,46 @@
+<?php
+
+namespace controller;
+
+use model\Person;
+use model\PersonRepository;
+use view\View;
+
+class PersonControllerTest extends \PHPUnit\Framework\TestCase
+{
+    private $mockPersonRepository;
+    private $mockView;
+
+    public function setUP()
+    {
+        $this->mockPersonRepository = $this->getMockBuilder('model\PersonRepository')->getMock();
+        $this->mockView = $this->getMockBuilder('view\PersonJsonView')->getMock();
+    }
+
+    public function tearDown()
+    {
+        $this->mockPersonRepository = null;
+        $this->mockView = null;
+    }
+
+
+    /** @test */
+    public function TestHandleFindPersonById_personFound_jsonFileGenerated($id = null)
+    {
+        $person = new Person(9, 2, "John");
+        $this->mockPersonRepository->expects($this->atLeastOnce())
+            ->method('findPersonById')
+            ->will($this->returnValue($person));
+
+        $this->mockView->expects($this->atLeastOnce())
+            ->method('show')
+            ->will($this->returnCallback(function ($object){
+                $person = $object['person'];
+                printf('%d %d %s', $person->getId(), $person->getPersonId(), $person->getDate());
+            }));
+
+        $personController = new PersonController($this->mockPersonRepository, $this->mockView);
+        $personController->handleFindPersonById($person->getId());
+        $this->expectOutputString(sprintf('%d %d %s', $person->getId(), $person->getEventsId(), $person->getName()));
+    }
+}
