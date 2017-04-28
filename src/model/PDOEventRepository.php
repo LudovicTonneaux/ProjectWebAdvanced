@@ -14,13 +14,13 @@ class PDOEventRepository implements EventsRepository
     public function findEventById($id )
     {
         try {
-            $statement = $this->connection->prepare('SELECT * FROM events WHERE eventId=?');
+            $statement = $this->connection->prepare('SELECT * FROM events WHERE eventID=?');
             $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->execute();
             $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             if (count($results) > 0) {
-                return new Events($results[0]['eventId'], $results[0]['datum']);
+                return new Events($results[0]['eventID'], $results[0]['datum']);
             } else {
                 return null;
             }

@@ -8,9 +8,9 @@ class EventJsonView implements View
     {
         header('Content-Type: application/json');
 
-        if (isset($data['event'])) {
-            $event = $data['event'];
-            echo json_encode(['eventId' => $event->getId(), 'datum' => $event->getDate()]);
+        if (isset($data['events'])) {
+            $event = $data['events'];
+            echo json_encode(['eventID' => $event->getId(), 'datum' => $event->getDate()]);
         } else {
             echo '{}';
         }

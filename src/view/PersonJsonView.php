@@ -10,7 +10,7 @@ class PersonJsonView implements View
 
         if (isset($data['persoon'])) {
             $persoon = $data['persoon'];
-            echo json_encode(['persoonId' => $persoon->getId(), 'naam' => $persoon->getName()]);
+            echo json_encode(['persoonID' => $persoon->getId(), 'naam' => $persoon->getName()]);
         } else {
             echo '{}';
         }
