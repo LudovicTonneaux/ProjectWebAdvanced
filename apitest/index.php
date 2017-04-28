@@ -27,9 +27,9 @@ $di->set('db', function () {
     return new PdoMysql(
         array(
             "host"			=>		"localhost",
-            "username"		=>		"root",
-            "password"		=>		"user",
-            "dbname"		=>		"projectWeb"
+            "username"		=>		"pxluser",
+            "password"		=>		"KKRuA3YFxIeQw!",
+            "dbname"		=>		"projectWeb2"
         )
     );
 });
