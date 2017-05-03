@@ -1,5 +1,5 @@
 <?php
- 
+
 class Person_model extends CI_Model
 {
     function __construct()

@@ -1,5 +1,5 @@
 <div class="pull-right">
-	<a href="<?php echo site_url('event/add'); ?>" class="btn btn-success">Add</a>
+	<a href="<?php echo site_url('event/add'); ?>" class="btn btn-success">Add</a> 
 </div>
 
 <table class="table table-striped table-bordered">
@@ -17,7 +17,7 @@
 		<td><?php echo $e['name']; ?></td>
 		<td><?php echo $e['date']; ?></td>
 		<td>
-            <a href="<?php echo site_url('event/edit/'.$e['id']); ?>" class="btn btn-info btn-xs">Edit</a>
+            <a href="<?php echo site_url('event/edit/'.$e['id']); ?>" class="btn btn-info btn-xs">Edit</a> 
             <a href="<?php echo site_url('event/remove/'.$e['id']); ?>" class="btn btn-danger btn-xs">Delete</a>
         </td>
     </tr>
