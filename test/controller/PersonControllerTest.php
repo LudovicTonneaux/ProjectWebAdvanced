@@ -42,7 +42,9 @@ class PersonControllerTest extends \PHPUnit\Framework\TestCase
         $personController = new PersonController($this->mockPersonRepository, $this->mockView);
         $personController->handleFindPersonById($person->getId());
         $this->expectOutputString(sprintf('%d %d %s', $person->getId(), $person->getEventsId(), $person->getName()));
-    }/** @test */
+    }
+
+    /** @test */
     public function TestHandleFindPersonByEventsId_personFound_jsonFileGenerated($eventsId = null)
     {
         $person = new Person(9, 2, "John");
