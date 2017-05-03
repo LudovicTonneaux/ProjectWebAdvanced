@@ -25,7 +25,7 @@ try {
     $row = $statement->fetch();
 
     if ($row !== false) {
-        echo "<p>Ingelogd als <br/>username: " . $row['username'] . '<br />password: ' .
+        echo "<p>Debug menu: <br/>username: " . $row['username'] . '<br />password: ' .
             $password_user . "<br/>encrypted password: " . $row['password'] . "</p>";
     } else {
         echo "<p style='font-weight: bold '>Login gefaald!</p>" .
