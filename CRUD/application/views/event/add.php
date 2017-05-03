@@ -1,5 +1,5 @@
 <?php echo validation_errors(); ?>
-<?php echo form_open('event/add',array("class"=>"form-horizontal")); ?>
+<?php echo form_open('index.php/event/add',array("class"=>"form-horizontal")); ?>
 
 	<div class="form-group">
 		<label for="person_id" class="col-md-4 control-label">Person Id</label>
