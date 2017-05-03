@@ -16,6 +16,6 @@
 <h2>Welcome <?php echo $username; ?>!</h2>
 <h3><?php echo anchor('person', 'Person', 'class="link-class"') ?></h3>
 <h3><?php echo anchor('event', 'Event', 'class="link-class"') ?></h3>
-<a href="home/logout" class="btn btn-success">Logout</a>
+<a href="home/logout" class="btn btn-danger">Logout</a>
 </body>
 </html>
