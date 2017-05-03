@@ -28,7 +28,7 @@ try {
         echo "<p>Debug menu: <br/>username: " . $row['username'] . '<br />password: ' .
             $password_user . "<br/>encrypted password: " . $row['password'] . "</p>";
     } else {
-        echo "<p style='font-weight: bold '>Login gefaald!</p>" .
+        echo "<p style='font-weight: bold '>login gefaald!</p>" .
             'invalid id and/or password: ' . $username . ' ' . $password_user;
     }
 
