@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://172.16.140.128/~user/CRUD_old/';
+$config['base_url'] = 'http://192.168.118.148/~user/Project/CRUD/index.php';
 
 /*
 |--------------------------------------------------------------------------
