@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Gegenereerd op: 03 mei 2017 om 14:44
+-- Gegenereerd op: 03 mei 2017 om 14:54
 -- Serverversie: 5.7.18-0ubuntu0.16.04.1
 -- PHP-versie: 7.0.15-0ubuntu0.16.04.4
 
@@ -27,19 +27,39 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `login` (
-  `username` varchar(30) NOT NULL,
-  `password` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` tinyint(4) NOT NULL,
+  `username` varchar(10) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `login`
 --
 
-INSERT INTO `login` (`username`, `password`) VALUES
-('frederic', '01df32998cb49083a65574ea325d2c36'),
-('ludo', '28fdcc190153c0fd2ff538ec18fcc113'),
-('davide', '446fca5553df49ad9c6348cf1ff71d51');
+INSERT INTO `login` (`id`, `username`, `password`) VALUES
+(1, 'davide', '446fca5553df49ad9c6348cf1ff71d51'),
+(2, 'ludo', '28fdcc190153c0fd2ff538ec18fcc113'),
+(3, 'frederic', '01df32998cb49083a65574ea325d2c36');
 
+--
+-- Indexen voor geëxporteerde tabellen
+--
+
+--
+-- Indexen voor tabel `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT voor geëxporteerde tabellen
+--
+
+--
+-- AUTO_INCREMENT voor een tabel `login`
+--
+ALTER TABLE `login`
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
