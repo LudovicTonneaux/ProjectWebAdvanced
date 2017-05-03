@@ -1,5 +1,5 @@
 <?php echo validation_errors(); ?>
-<?php echo form_open('index.php/person/edit/'.$person['id'],array("class"=>"form-horizontal")); ?>
+<?php echo form_open('person/edit/'.$person['id'],array("class"=>"form-horizontal")); ?>
 
 	<div class="form-group">
 		<label for="first_name" class="col-md-4 control-label">First Name</label>
