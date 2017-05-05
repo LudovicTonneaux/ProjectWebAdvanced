@@ -67,20 +67,7 @@ for ($i=0;$i<count($columns);$i++) {
 // create SQL based on HTTP method
 switch ($method) {
     case 'GET':
-
-       $sql = "select * from `$table`".($key?" WHERE id=$key":''); break;
-
-        $pdo = new PDO("mysql:host=localhost;dbname=$database",
-            $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE,
-            PDO::ERRMODE_EXCEPTION);
-
-        $sql = $pdo->prepare("select * from  :table" . ":id WHERE id = :id");
-        $sql->bindParam(':table', $table, PDO::PARAM_STR);
-        $sql->bindParam(':id', $key, PDO::PARAM_INT);
-        $sql->setFetchMode(PDO::FETCH_ASSOC);
-        $sql->execute();
-        var_dump($sql->fetch());
+        $sql = "select * from `$table`".($key?" WHERE id=$key":''); break;
     case 'PUT':
         $sql = "update `$table` set $set where id=$key"; break;
     case 'POST':
