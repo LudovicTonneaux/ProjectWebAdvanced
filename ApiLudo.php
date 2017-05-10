@@ -6,9 +6,9 @@
  * Time: 15:58
  */
 
-$user='root';
-$password='user';
-$database='ProjectWebAdvanced';
+$user='pxluser';
+$password='KKRuA3YFxIeQw!';
+$database='projectWeb';
 $hostname = 'localhost';
 $pdo = null;
 
