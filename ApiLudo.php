@@ -6,9 +6,14 @@
  * Time: 15:58
  */
 
-$user = 'pxluser';
-$password = 'KKRuA3YFxIeQw!';
-$database = 'projectWeb';
+//$user = 'pxluser';
+//$password = 'KKRuA3YFxIeQw!';
+//$database = 'projectWeb';
+
+$user = 'root';
+$password = 'user';
+$database = 'ProjectWebAdvanced';
+
 $hostname = 'localhost';
 $pdo = null;
 
@@ -21,26 +26,41 @@ try {
 
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'GET':
-            if (isset($_GET['table']) AND !isset($_GET['id']) AND isset($_GET['from']) AND isset($_GET['until'])) {
-                //query die perfect werkt op de server zelf:
-                //SELECT * FROM events WHERE datum BETWEEN '2017-03-03' AND '2017-05-23' ORDER BY datum ASC;
-                $statement = $pdo->prepare('SELECT * FROM ' . $_GET['table'] . ' WHERE datum BETWEEN ' . $_GET['from'] . ' AND ' . $_GET['until'] . ' ORDER BY datum ASC');
-                $statement->execute();
-                $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-                $json = json_encode($results);
-
-                //checken van de vars
-                echo $_GET['table'] . "<br />";
-                echo $_GET['from'] . "<br />";
-                echo $_GET['until'];
-            } elseif (isset($_GET['table']) AND !isset($_GET['id'])) {
-                $statement = $pdo->prepare('SELECT * from ' . $_GET['table']);
+            //Get event by person_id and date
+            if (isset($_GET['table']) AND isset($_GET['person_id']) AND isset($_GET['from']) AND isset($_GET['until']) AND $_GET['table'] == "event") {
+                $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE person_id = ' . $_GET['person_id'] . ' AND date BETWEEN \'' . $_GET['from'] . '\' AND \'' . $_GET['until'] . '\' ORDER BY date ASC');
                 $statement->execute();
                 $results = $statement->fetchAll(PDO::FETCH_ASSOC);
                 $json = json_encode($results);
                 echo $json;
-            } elseif (isset($_GET['table']) AND isset($_GET['id'])) {
+            }
+            //Get event by date
+            elseif (isset($_GET['table']) AND isset($_GET['from']) AND isset($_GET['until']) AND $_GET['table'] == "event") {
+                $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE date BETWEEN \'' . $_GET['from'] . '\' AND \'' . $_GET['until'] . '\' ORDER BY date ASC');
+                $statement->execute();
+                $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $json = json_encode($results);
+                echo $json;
+            }
+            //Get event by person_id
+            elseif (isset($_GET['table']) AND isset($_GET['person_id']) AND $_GET['table'] == "event") {
+                $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE person_id = ' . $_GET['person_id']);
+                $statement->execute();
+                $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $json = json_encode($results);
+                echo $json;
+            }
+            //Get by id
+            elseif (isset($_GET['table']) AND isset($_GET['id'])) {
                 $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
+                $statement->execute();
+                $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $json = json_encode($results);
+                echo $json;
+            }
+            //Get all
+            elseif (isset($_GET['table'])) {
+                $statement = $pdo->prepare('SELECT * from ' . $_GET['table']);
                 $statement->execute();
                 $results = $statement->fetchAll(PDO::FETCH_ASSOC);
                 $json = json_encode($results);
