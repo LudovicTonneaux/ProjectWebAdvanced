@@ -68,10 +68,36 @@ try {
             }
             break;
         case 'PUT':
-            if (isset($_GET['table']) AND isset($_GET['id']) AND isset($_GET['first_name']) AND isset($_GET['last_name'])) {
-                $statement = $pdo->prepare('UPDATE ' . $_GET['table'] . ' SET first_name = "' . $_GET['first_name'] . '", last_name = "' . $_GET['last_name'] . '" WHERE id = ' . $_GET['id']);
-                $statement->debugDumpParams();
+            //event
+            if (isset($_GET['table']) AND $_GET['table'] == "event" AND isset($_GET['id'])) {
+                if (isset($_GET['name'])) {
+                    $statement = $pdo->prepare('UPDATE ' . $_GET['table'] . ' SET name = \'' . $_GET['name'] . '\' WHERE id = ' . $_GET['id']);
+                    $statement->execute();
+                }
+                if (isset($_GET['date'])) {
+                    $statement = $pdo->prepare('UPDATE ' . $_GET['table'] . ' SET date = \'' . $_GET['date'] . '\' WHERE id = ' . $_GET['id']);
+                    $statement->execute();
+                }
+                if (isset($_GET['person_id'])) {
+                    $statement = $pdo->prepare('UPDATE ' . $_GET['table'] . ' SET person_id = \'' . $_GET['person_id'] . '\' WHERE id = ' . $_GET['id']);
+                    $statement->execute();
+                }
+                $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
                 $statement->execute();
+                $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $json = json_encode($results);
+                echo $json;
+            }
+            //person
+            elseif (isset($_GET['table']) AND $_GET['table'] == "person" AND isset($_GET['id'])) {
+                if (isset($_GET['first_name'])) {
+                    $statement = $pdo->prepare('UPDATE ' . $_GET['table'] . ' SET first_name = \'' . $_GET['first_name'] . '\' WHERE id = ' . $_GET['id']);
+                    $statement->execute();
+                }
+                if (isset($_GET['last_name'])) {
+                    $statement = $pdo->prepare('UPDATE ' . $_GET['table'] . ' SET last_name = \'' . $_GET['last_name'] . '\' WHERE id = ' . $_GET['id']);
+                    $statement->execute();
+                }
                 $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
                 $statement->execute();
                 $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -80,10 +106,29 @@ try {
             }
             break;
         case 'POST':
+            if (isset($_GET['table']) AND $_GET['table'] == "event" AND isset($_GET['name']) AND isset($_GET['date']) AND isset($_GET['person_id'])) {
+                $statement = $pdo->prepare('INSERT INTO ' . $_GET['table'] . ' (id, name, date, person_id) VALUES (NULL, \'' . $_GET['name'] . '\', \'' . $_GET['date'] . '\', ' . $_GET['person_id'] . ')');
+                $statement->execute();
+                $statement->debugDumpParams();
+            }
+
+            if (isset($_GET['table']) AND $_GET['table'] == "person" AND isset($_GET['first_name']) AND isset($_GET['last_name'])) {
+                $statement = $pdo->prepare('INSERT INTO ' . $_GET['table'] . ' (id, first_name, last_name) VALUES (NULL, \'' . $_GET['first_name'] . '\', \'' . $_GET['last_name'] . '\')');
+                $statement->execute();
+                $statement->debugDumpParams();
+            }
 
             break;
         case 'DELETE':
-
+        if (isset($_GET['table']) AND isset($_GET['id'])) {
+            $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $json = json_encode($results);
+            $statement = $pdo->prepare('DELETE from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
+            $statement->execute();
+            echo $json . ' has been deleted!';
+    }
             break;
     }
 } catch (PDOException $e) {
