@@ -6,15 +6,18 @@
  * Time: 15:58
  */
 
-//$user = 'pxluser';
-//$password = 'KKRuA3YFxIeQw!';
-//$database = 'projectWeb';
+$xml = simplexml_load_file("configDatabank_wp6.xml");// or die("Error: Cannot create xml object");
 
-$user = 'root';
-$password = 'user';
-$database = 'ProjectWebAdvanced';
+$user = $xml->Login->Username->__toString();
+$password = $xml->Login->Password->__toString();
+$database = $xml->Login->DatabaseName->__toString();
 
-$hostname = 'localhost';
+//$user = 'root';
+//$password = 'user';
+//$database = 'ProjectWebAdvanced';
+
+$hostname = $xml->Login->Hostname->__toString();
+
 $pdo = null;
 
 try {
