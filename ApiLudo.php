@@ -25,8 +25,14 @@ try {
 
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'GET':
+
+            if ($_GET['table'] != "event" OR $_GET['table'] != "person") {
+                echo "the table must be event or person";
+                break;
+            }
+
             //Get event by person_id and date
-            if ($_GET['table'] AND $_GET['person_id'] AND $_GET['from'] AND $_GET['until'] AND $_GET['table'] == "event") {
+            elseif ($_GET['table'] AND $_GET['person_id'] AND $_GET['from'] AND $_GET['until'] AND $_GET['table'] == "event") {
                 $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE person_id = ' . $_GET['person_id'] . ' AND date BETWEEN \'' . $_GET['from'] . '\' AND \'' . $_GET['until'] . '\' ORDER BY date ASC');
                 $statement->execute();
                 $results = $statement->fetchAll(PDO::FETCH_ASSOC);
