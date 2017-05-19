@@ -126,7 +126,7 @@ try {
                 }
                 else {
                     $statement = $pdo->prepare('INSERT INTO ' . $_POST['table'] . ' (id, name, date, person_id) VALUES (NULL, ' . '\'' . $_POST['name'] . '\', ' . '\'' . $_POST['date'] . '\', ' . $_POST['person_id'] . ')');
-                    $statement->execute(); 
+                    $statement->execute();
                     $statement->debugDumpParams();
                     break;
                 }
@@ -143,7 +143,7 @@ try {
                 }
                 else {
                     $statement = $pdo->prepare('INSERT INTO ' . $_POST['table'] . ' (id, first_name, last_name) VALUES (NULL, ' . '\'' . $_POST['first_name'] . '\', ' . '\'' . $_POST['last_name'] . '\')');
-                    $statement->execute(); 
+                    $statement->execute();
                     $statement->debugDumpParams();
                     break;
                 }
