@@ -154,15 +154,15 @@ try {
                 break;
             }
         case 'DELETE':
-        if (isset($_GET['table']) AND isset($_GET['id'])) {
-            $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
-            $statement->execute();
-            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-            $json = json_encode($results);
-            $statement = $pdo->prepare('DELETE from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
-            $statement->execute();
-            echo $json . ' has been deleted!';
-    }
+            if (isset($_GET['table']) AND isset($_GET['id'])) {
+                $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
+                $statement->execute();
+                $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $json = json_encode($results);
+                $statement = $pdo->prepare('DELETE from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
+                $statement->execute();
+                echo $json . ' has been deleted!';
+            }
             break;
     }
 } catch (PDOException $e) {
