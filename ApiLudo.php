@@ -109,19 +109,49 @@ try {
             }
             break;
         case 'POST':
-            if (isset($_GET['table']) AND $_GET['table'] == "event" AND isset($_GET['name']) AND isset($_GET['date']) AND isset($_GET['person_id'])) {
-                $statement = $pdo->prepare('INSERT INTO ' . $_GET['table'] . ' (id, name, date, person_id) VALUES (NULL, \'' . $_GET['name'] . '\', \'' . $_GET['date'] . '\', ' . $_GET['person_id'] . ')');
-                $statement->execute();
-                $statement->debugDumpParams();
-            }
 
-            if (isset($_GET['table']) AND $_GET['table'] == "person" AND isset($_GET['first_name']) AND isset($_GET['last_name'])) {
-                $statement = $pdo->prepare('INSERT INTO ' . $_GET['table'] . ' (id, first_name, last_name) VALUES (NULL, \'' . $_GET['first_name'] . '\', \'' . $_GET['last_name'] . '\')');
-                $statement->execute();
-                $statement->debugDumpParams();
-            }
+            if (isset($_POST['table']) AND $_POST['table'] == "event") {
 
-            break;
+                if (isset($_POST['name']) AND $_POST['name'] == NULL) {
+                    echo 'You have to set a value for name';
+                    break;
+                }
+                else if (isset($_POST['date']) AND $_POST['date'] == NULL) {
+                    echo 'You have to set a value for date';
+                    break;
+                }
+                else if (isset($_POST['person_id']) AND $_POST['person_id'] == NULL) {
+                    echo 'You have to set a value for person_id';
+                    break;
+                }
+                else {
+                    $statement = $pdo->prepare('INSERT INTO ' . $_POST['table'] . ' (id, name, date, person_id) VALUES (NULL, ' . '\'' . $_POST['name'] . '\', ' . '\'' . $_POST['date'] . '\', ' . $_POST['person_id'] . ')');
+                    $statement->execute(); 
+                    $statement->debugDumpParams();
+                    break;
+                }
+            }
+            else if (isset($_POST['table']) AND $_POST['table'] == "person") {
+
+                if (isset($_POST['first_name']) AND $_POST['first_name'] == NULL) {
+                    echo 'You have to set a value for first_name';
+                    break;
+                }
+                else if (isset($_POST['last_name']) AND $_POST['last_name'] == NULL) {
+                    echo 'You have to set a value for last_name';
+                    break;
+                }
+                else {
+                    $statement = $pdo->prepare('INSERT INTO ' . $_POST['table'] . ' (id, first_name, last_name) VALUES (NULL, ' . '\'' . $_POST['first_name'] . '\', ' . '\'' . $_POST['last_name'] . '\')');
+                    $statement->execute(); 
+                    $statement->debugDumpParams();
+                    break;
+                }
+            }
+            else {
+                echo 'the table ' . $_POST['table'] . ' is not supported';
+                break;
+            }
         case 'DELETE':
         if (isset($_GET['table']) AND isset($_GET['id'])) {
             $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
