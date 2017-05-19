@@ -6,17 +6,17 @@
  * Time: 15:58
  */
 
-//$xml = simplexml_load_file("configDatabank_wp6.xml");// or die("Error: Cannot create xml object");
+$xml = simplexml_load_file("configDatabank_wp6.xml");// or die("Error: Cannot create xml object");
 
-//$user = $xml->Login->Username->__toString();
-//$password = $xml->Login->Password->__toString();
-//$database = $xml->Login->DatabaseName->__toString();
+$user = $xml->Login->Username->__toString();
+$password = $xml->Login->Password->__toString();
+$database = $xml->Login->DatabaseName->__toString();
 
-$user = 'root';
-$password = 'user';
-$database = 'ProjectWebAdvanced';
+//$user = 'root';
+//$password = 'user';
+//$database = 'ProjectWebAdvanced';
 
-//$hostname = $xml->Login->Hostname->__toString();
+$hostname = $xml->Login->Hostname->__toString();
 
 $pdo = null;
 
@@ -126,7 +126,6 @@ try {
                 }
                 else {
                     $statement = $pdo->prepare('INSERT INTO ' . $_GET['table'] . ' (id, name, date, person_id) VALUES (NULL, ' . '\'' . $_GET['name'] . '\', ' . '\'' . $_GET['date'] . '\', ' . $_GET['person_id'] . ') ');
-                    $statement = $pdo->prepare('INSERT INTO ' . $_POST['table'] . ' (id, name, date, person_id) VALUES (NULL, ' . '\'' . $_POST['name'] . '\', ' . '\'' . $_POST['date'] . '\', ' . $_POST['person_id'] . ')');
                     $statement->execute();
                     $statement->debugDumpParams();
                     break;
@@ -143,7 +142,6 @@ try {
                 }
                 else {
                     $statement = $pdo->prepare('INSERT INTO ' . $_GET['table'] . ' (id, first_name, last_name) VALUES (NULL, ' . '\'' . $_GET['first_name'] . '\', ' . '\'' . $_GET['last_name'] . '\')');
-                    $statement = $pdo->prepare('INSERT INTO ' . $_POST['table'] . ' (id, first_name, last_name) VALUES (NULL, ' . '\'' . $_POST['first_name'] . '\', ' . '\'' . $_POST['last_name'] . '\')');
                     $statement->execute();
                     $statement->debugDumpParams();
                     break;
