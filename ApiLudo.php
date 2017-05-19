@@ -12,10 +12,6 @@ $user = $xml->Login->Username->__toString();
 $password = $xml->Login->Password->__toString();
 $database = $xml->Login->DatabaseName->__toString();
 
-//$user = 'root';
-//$password = 'user';
-//$database = 'ProjectWebAdvanced';
-
 $hostname = $xml->Login->Hostname->__toString();
 
 $pdo = null;
@@ -30,7 +26,7 @@ try {
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'GET':
             //Get event by person_id and date
-            if (isset($_GET['table']) AND isset($_GET['person_id']) AND isset($_GET['from']) AND isset($_GET['until']) AND $_GET['table'] == "event") {
+            if ($_GET['table'] AND $_GET['person_id'] AND $_GET['from'] AND $_GET['until'] AND $_GET['table'] == "event") {
                 $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE person_id = ' . $_GET['person_id'] . ' AND date BETWEEN \'' . $_GET['from'] . '\' AND \'' . $_GET['until'] . '\' ORDER BY date ASC');
                 $statement->execute();
                 $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -38,7 +34,7 @@ try {
                 echo $json;
             }
             //Get event by date
-            elseif (isset($_GET['table']) AND isset($_GET['from']) AND isset($_GET['until']) AND $_GET['table'] == "event") {
+            elseif ($_GET['table'] AND $_GET['from'] AND $_GET['until'] AND $_GET['table'] == "event") {
                 $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE date BETWEEN \'' . $_GET['from'] . '\' AND \'' . $_GET['until'] . '\' ORDER BY date ASC');
                 $statement->execute();
                 $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -46,7 +42,7 @@ try {
                 echo $json;
             }
             //Get event by person_id
-            elseif (isset($_GET['table']) AND isset($_GET['person_id']) AND $_GET['table'] == "event") {
+            elseif ($_GET['table'] AND $_GET['person_id'] AND $_GET['table'] == "event") {
                 $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE person_id = ' . $_GET['person_id']);
                 $statement->execute();
                 $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -54,7 +50,7 @@ try {
                 echo $json;
             }
             //Get by id
-            elseif (isset($_GET['table']) AND isset($_GET['id'])) {
+            elseif ($_GET['table'] AND $_GET['id']) {
                 $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
                 $statement->execute();
                 $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -62,7 +58,7 @@ try {
                 echo $json;
             }
             //Get all
-            elseif (isset($_GET['table'])) {
+            elseif ($_GET['table']) {
                 $statement = $pdo->prepare('SELECT * from ' . $_GET['table']);
                 $statement->execute();
                 $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -72,16 +68,16 @@ try {
             break;
         case 'PUT':
             //event
-            if (isset($_GET['table']) AND $_GET['table'] == "event" AND isset($_GET['id'])) {
-                if (isset($_GET['name'])) {
+            if ($_GET['table'] AND $_GET['table'] == "event" AND $_GET['id']) {
+                if ($_GET['name']) {
                     $statement = $pdo->prepare('UPDATE ' . $_GET['table'] . ' SET name = \'' . $_GET['name'] . '\' WHERE id = ' . $_GET['id']);
                     $statement->execute();
                 }
-                if (isset($_GET['date'])) {
+                if ($_GET['date']) {
                     $statement = $pdo->prepare('UPDATE ' . $_GET['table'] . ' SET date = \'' . $_GET['date'] . '\' WHERE id = ' . $_GET['id']);
                     $statement->execute();
                 }
-                if (isset($_GET['person_id'])) {
+                if ($_GET['person_id']) {
                     $statement = $pdo->prepare('UPDATE ' . $_GET['table'] . ' SET person_id = \'' . $_GET['person_id'] . '\' WHERE id = ' . $_GET['id']);
                     $statement->execute();
                 }
@@ -92,12 +88,12 @@ try {
                 echo $json;
             }
             //person
-            elseif (isset($_GET['table']) AND $_GET['table'] == "person" AND isset($_GET['id'])) {
-                if (isset($_GET['first_name'])) {
+            elseif ($_GET['table'] AND $_GET['table'] == "person" AND $_GET['id']) {
+                if ($_GET['first_name']) {
                     $statement = $pdo->prepare('UPDATE ' . $_GET['table'] . ' SET first_name = \'' . $_GET['first_name'] . '\' WHERE id = ' . $_GET['id']);
                     $statement->execute();
                 }
-                if (isset($_GET['last_name'])) {
+                if ($_GET['last_name']) {
                     $statement = $pdo->prepare('UPDATE ' . $_GET['table'] . ' SET last_name = \'' . $_GET['last_name'] . '\' WHERE id = ' . $_GET['id']);
                     $statement->execute();
                 }
@@ -109,18 +105,18 @@ try {
             }
             break;
         case 'POST':
-            if (isset($_GET['table']) AND $_GET['table'] == "event")
+            if ($_GET['table'] AND $_GET['table'] == "event")
             {
 
-                if (isset($_GET['name']) AND $_GET['name'] == NULL) {
+                if (!$_GET['name']) {
                     echo 'You have to set a value for name';
                     break;
                 }
-                else if (isset($_GET['date']) AND $_GET['date'] == NULL) {
+                else if (!$_GET['date']) {
                     echo 'You have to set a value for date';
                     break;
                 }
-                else if (isset($_GET['person_id']) AND $_GET['person_id'] == NULL) {
+                else if (!$_GET['person_id']) {
                     echo 'You have to set a value for person_id';
                     break;
                 }
@@ -131,12 +127,12 @@ try {
                     break;
                 }
             }
-            else if (isset($_GET['table']) AND $_GET['table'] == "person") {
-                if (isset($_GET['first_name']) AND $_GET['first_name'] == NULL) {
+            else if ($_GET['table'] AND $_GET['table'] == "person") {
+                if (!$_GET['first_name']) {
                     echo 'You have to set a value for first_name';
                     break;
                 }
-                else if (isset($_GET['last_name']) AND $_GET['last_name'] == NULL) {
+                else if (!$_GET['last_name']) {
                     echo 'You have to set a value for last_name';
                     break;
                 }
@@ -152,7 +148,7 @@ try {
                 break;
             }
         case 'DELETE':
-            if (isset($_GET['table']) AND isset($_GET['id'])) {
+            if ($_GET['table'] AND $_GET['id']) {
                 $statement = $pdo->prepare('SELECT * from ' . $_GET['table'] . ' WHERE id = ' . $_GET['id']);
                 $statement->execute();
                 $results = $statement->fetchAll(PDO::FETCH_ASSOC);
