@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WP5: Html5 drag & drop DEMO</title>
+    <link rel="stylesheet" type="text/css" href="demo.css">
+</head>
+<body>
+
+<div class="row">
+    <div class="col-full instructions">
+        <button onclick="shuffleIcons(), shuffleDropzones()"> shuffle</button>
+        <h1>Score: <span id="score">0</span>/12.</h1>
+        <h3>Place the icon in the correct dropzone to earn score!</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-half instructions">
+        <h1>Icons</h1>
+        <h3>You may drag the web related logos/icons back into this container in case you need to rearrange.</h3>
+    </div>
+    <div class="col-half instructions">
+        <h1>Dropzone</h1>
+        <h3>Drop your icons here</h3>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-half hitbox" >
+        <div id="dropzone-container" class="dropzone container" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            <img id="icon-apache" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/apache.png">
+            <img id="icon-bootstrap" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/bootstrap.png">
+            <img id="icon-html5" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/html5.png">
+            <img id="icon-javascript" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/javascript.png">
+            <img id="icon-json" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/json.png">
+            <img id="icon-mysql" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/mysql.png">
+            <img id="icon-php" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/php.png">
+            <img id="icon-phpstorm" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/phpstorm.png">
+            <img id="icon-vagrant" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/vagrant.png">
+            <img id="icon-angularjs" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/angularjs.png">
+            <img id="icon-codeigniter" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/codeigniter.png">
+            <img id="icon-git" class="icon" draggable="true" ondragstart="return start(event)" ondragend="return end(event)" src="img/git.png">
+        </div>
+    </div>
+
+    <div id="dropzone-holder" class="col-half">
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-apache" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-bootstrap" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-html5" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-javascript" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-json" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-mysql" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-php" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-phpstorm" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-vagrant" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-codeigniter" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-git" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+        <div class="col-quarter hitbox">
+            <img class="answer hide" src="img/right.png" />
+            <div id="dropzone-angularjs" class="dropzone border" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="demo.js"></script>
+
+</body>
+</html>
