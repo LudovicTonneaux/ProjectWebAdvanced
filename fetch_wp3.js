@@ -12,6 +12,15 @@ fetch(request).then(function (response) {
     for (var i = 0; i < response2.length; i++) {
         console.log(response2[i]);
     }
+    this.getJSON(response2.json(), function (data) {
+        this.each(data, function (i, f) {
+            var tblRow = "<tr>" + "<td>" + f.eventID + "</td>" +
+                "<td>" + f.persoonID + "</td>" + "<td>" + f.datum + "</td>" + "</tr>";
+            this(tblRow).appendTo("#userdata tbody");
+        });
+
+    });
+
 }).catch(function (err) {
     console.log(err.message);
 });
