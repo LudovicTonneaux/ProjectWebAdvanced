@@ -38,7 +38,7 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`id`, `name`, `date`, `person_id`) VALUES
-(1, 'fzefef', '2012-02-05', 1);
+(1, 'Event1', '2012-02-05', 1);
 
 -- --------------------------------------------------------
 
@@ -57,8 +57,8 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`id`, `first_name`, `last_name`) VALUES
-(1, 'Testee', 'Test'),
-(2, 'test2', 'blablabla');
+(1, 'User1', 'User 1'),
+(2, 'User2', 'User 2');
 
 -- --------------------------------------------------------
 
