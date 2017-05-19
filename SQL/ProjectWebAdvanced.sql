@@ -34,15 +34,6 @@ CREATE TABLE `event` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `event`
---
-
-INSERT INTO `event` (`id`, `name`, `date`, `person_id`) VALUES
-(1, 'Event1', '2012-02-05', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `person`
 --
 
@@ -53,31 +44,14 @@ CREATE TABLE `person` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `person`
---
-
-INSERT INTO `person` (`id`, `first_name`, `last_name`) VALUES
-(1, 'User1', 'User 1'),
-(2, 'User2', 'User 2');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
-  `id` tinyint(4) NOT NULL,
+  `id` int(4) NOT NULL,
   `username` varchar(10) NOT NULL,
   `password` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1, 'ludo', '28fdcc190153c0fd2ff538ec18fcc113');
 
 --
 -- Indexes for dumped tables
@@ -109,17 +83,45 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `person`
 --
 ALTER TABLE `person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Dumping data for table `person`
+--
+
+INSERT INTO `person` (`id`, `first_name`, `last_name`) VALUES
+(NULL, 'User1', 'User 1'),
+(NULL, 'User2', 'User 2');
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`) VALUES
+(NULL, 'ludo', '28fdcc190153c0fd2ff538ec18fcc113');
+
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`id`, `name`, `date`, `person_id`) VALUES
+(NULL, 'Event1', '2012-02-05', 1),
+(NULL, 'Event2', '2012-02-05', 1);
+
+-- --------------------------------------------------------
