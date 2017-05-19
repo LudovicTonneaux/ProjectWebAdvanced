@@ -5,11 +5,14 @@ var request = new Request('http://192.168.118.148/~user/Project/ApiLudo.php?tabl
     method: 'GET'
 });
 
- fetch(request).then(function (response) {
-     return response.json();
- }).then(function(response2){
-     console.log('JSON: ', response2);
- }).catch(function (err) {
-     console.log(err.message);
-     console.log('fataal!!!!');
- });
+fetch(request).then(function (response) {
+    return response.json();
+}).then(function (response2) {
+    console.log('JSON: ', response2);
+    for (var i = 0; i < response2.length; i++) {
+        console.log(response2[i]);
+    }
+}).catch(function (err) {
+    console.log(err.message);
+});
+
