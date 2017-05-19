@@ -6,17 +6,17 @@
  * Time: 15:58
  */
 
-$xml = simplexml_load_file("configDatabank_wp6.xml");// or die("Error: Cannot create xml object");
+//$xml = simplexml_load_file("configDatabank_wp6.xml");// or die("Error: Cannot create xml object");
 
-$user = $xml->Login->Username->__toString();
-$password = $xml->Login->Password->__toString();
-$database = $xml->Login->DatabaseName->__toString();
+//$user = $xml->Login->Username->__toString();
+//$password = $xml->Login->Password->__toString();
+//$database = $xml->Login->DatabaseName->__toString();
 
-//$user = 'root';
-//$password = 'user';
-//$database = 'ProjectWebAdvanced';
+$user = 'root';
+$password = 'user';
+$database = 'ProjectWebAdvanced';
 
-$hostname = $xml->Login->Hostname->__toString();
+//$hostname = $xml->Login->Hostname->__toString();
 
 $pdo = null;
 
@@ -109,39 +109,40 @@ try {
             }
             break;
         case 'POST':
+            if (isset($_GET['table']) AND $_GET['table'] == "event")
+            {
 
-            if (isset($_POST['table']) AND $_POST['table'] == "event") {
-
-                if (isset($_POST['name']) AND $_POST['name'] == NULL) {
+                if (isset($_GET['name']) AND $_GET['name'] == NULL) {
                     echo 'You have to set a value for name';
                     break;
                 }
-                else if (isset($_POST['date']) AND $_POST['date'] == NULL) {
+                else if (isset($_GET['date']) AND $_GET['date'] == NULL) {
                     echo 'You have to set a value for date';
                     break;
                 }
-                else if (isset($_POST['person_id']) AND $_POST['person_id'] == NULL) {
+                else if (isset($_GET['person_id']) AND $_GET['person_id'] == NULL) {
                     echo 'You have to set a value for person_id';
                     break;
                 }
                 else {
+                    $statement = $pdo->prepare('INSERT INTO ' . $_GET['table'] . ' (id, name, date, person_id) VALUES (NULL, ' . '\'' . $_GET['name'] . '\', ' . '\'' . $_GET['date'] . '\', ' . $_GET['person_id'] . ') ');
                     $statement = $pdo->prepare('INSERT INTO ' . $_POST['table'] . ' (id, name, date, person_id) VALUES (NULL, ' . '\'' . $_POST['name'] . '\', ' . '\'' . $_POST['date'] . '\', ' . $_POST['person_id'] . ')');
                     $statement->execute();
                     $statement->debugDumpParams();
                     break;
                 }
             }
-            else if (isset($_POST['table']) AND $_POST['table'] == "person") {
-
-                if (isset($_POST['first_name']) AND $_POST['first_name'] == NULL) {
+            else if (isset($_GET['table']) AND $_GET['table'] == "person") {
+                if (isset($_GET['first_name']) AND $_GET['first_name'] == NULL) {
                     echo 'You have to set a value for first_name';
                     break;
                 }
-                else if (isset($_POST['last_name']) AND $_POST['last_name'] == NULL) {
+                else if (isset($_GET['last_name']) AND $_GET['last_name'] == NULL) {
                     echo 'You have to set a value for last_name';
                     break;
                 }
                 else {
+                    $statement = $pdo->prepare('INSERT INTO ' . $_GET['table'] . ' (id, first_name, last_name) VALUES (NULL, ' . '\'' . $_GET['first_name'] . '\', ' . '\'' . $_GET['last_name'] . '\')');
                     $statement = $pdo->prepare('INSERT INTO ' . $_POST['table'] . ' (id, first_name, last_name) VALUES (NULL, ' . '\'' . $_POST['first_name'] . '\', ' . '\'' . $_POST['last_name'] . '\')');
                     $statement->execute();
                     $statement->debugDumpParams();
@@ -149,7 +150,7 @@ try {
                 }
             }
             else {
-                echo 'the table ' . $_POST['table'] . ' is not supported';
+                echo 'the table ' . $_GET['table'] . ' is not supported';
                 break;
             }
         case 'DELETE':
