@@ -27,8 +27,6 @@ document.getElementById("Get_Data").addEventListener("click", function () {
             console.log(response2[i]);
             document.write(JSON.stringify(response2[i]));
         }
-
-
     }).catch(function (err) {
         console.log(err.message);
     });

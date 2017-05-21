@@ -1,0 +1,48 @@
+#Post_Data {
+    margin-left: 40%;
+}
+
+#Get_Data {
+    margin-left: 5%;
+}
+
+#Post_Data, #Get_Data {
+    background-color: #69a5ff;
+    color: #FFFFFF;
+    font-family: Calibri, sans-serif;
+    font-size: 22pt;
+    border-radius: 8%;
+    padding: 3px;
+    margin-top: 10%
+}
+
+#Post_Data:hover, #Get_Data:hover {
+    background-color: #3366FF;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1200px) {
+    #Post_Data, #Get_Data {
+        margin-top: 20%;
+    }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 800px) {
+    #Post_Data, #Get_Data {
+        font-size: 15pt;
+    }
+
+    #Get_Data {
+        margin-right: 8%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #Post_Data {
+        margin-left: 15%;
+    }
+
+    #Post_Data, #Get_Data {
+        font-size: 14pt;
+    }
+}
