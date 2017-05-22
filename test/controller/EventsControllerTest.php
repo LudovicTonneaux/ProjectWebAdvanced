@@ -2,85 +2,103 @@
 
 namespace controller;
 
-use model\Events;
-use model\EventsRepository;
-use view\View;
 
-class EventsControllerTest extends \PHPUnit\Framework\TestCase
+
+
+class EventsControllerTest extends PHPUnit\Framework\Testcase
 {
-    private $mockEventsRepository;
-    private $mockView;
+    private $pdo = null;
 
     public function setUP()
     {
-        $this->mockEventsRepository = $this->getMockBuilder('model\EventsRepository')->getMock();
-        $this->mockView = $this->getMockBuilder('view\EventJsonView')->getMock();
+        $pdo = null;
+
+        try {
+        $xml = simplexml_load_file("configDatabank_wp6.xml");// or die("Error: Cannot create xml object");
+
+        $user = $xml->Login->Username->__toString();
+        $password = $xml->Login->Password->__toString();
+        $database = $xml->Login->DatabaseName->__toString();
+
+        $hostname = $xml->Login->Hostname->__toString();
+
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database",
+            $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE,
+            PDO::ERRMODE_EXCEPTION);
+
+        } catch (PDOException $e) {
+            print 'Exception!: ' . $e->getMessage();
+        } finally {
+            $pdo = null;
+        }
     }
 
     public function tearDown()
     {
-        $this->mockEventsRepository = null;
-        $this->mockView = null;
+        $pdo = null;
     }
 
 
     /** @test */
-    public function TestHandleFindEventById_eventFound_jsonFileGenerated($id = null)
+    public function TestGetEventByPerson_idAndDate()
     {
-        $events = new Events(9, 2, 2017 - 12 - 12);
-        $this->mockEventsRepository->expects($this->atLeastOnce())
-            ->method('findEventById')
-            ->will($this->returnValue($events));
+        $person_id = 2;
+        $date1 = "2011-01-01";
+        $date2 = "2013-01-01";
 
-        $this->mockView->expects($this->atLeastOnce())
-            ->method('show')
-            ->will($this->returnCallback(function ($object) {
-                $events = $object['events'];
-                printf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate());
-            }));
+        $statement = $this->pdo->prepare('SELECT * from event WHERE person_id = ' . $person_id . ' AND date BETWEEN ' .$date1 . ' AND ' . $date2 . ' ORDER BY date ASC');
+        $statement->execute();
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        $eventsController = new EventsController($this->mockEventsRepository, $this->mockView);
-        $eventsController->handleFindEventById($events->getId());
-        $this->expectOutputString(sprintf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate()));
+        $this->assertNotNull($results);
     }
 
     /** @test */
-    public function TestHandleFindEventByPersonId_eventFound_byPerson($personId = null)
+    public function TestGetEventByDate()
     {
-        $events = new Events(9, 2, 2017 - 12 - 12);
-        $this->mockEventsRepository->expects($this->atLeastOnce())
-            ->method('findEventById')
-            ->will($this->returnValue($events));
+        $date1 = "2011-01-01";
+        $date2 = "2013-01-01";
 
-        $this->mockView->expects($this->atLeastOnce())
-            ->method('show')
-            ->will($this->returnCallback(function ($object) {
-                $events = $object['events'];
-                printf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate());
-            }));
+        $statement = $this->pdo->prepare('SELECT * from event WHERE date BETWEEN ' . $date1 . ' AND ' . $date2 .' ORDER BY date ASC');
+        $statement->execute();
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        $eventsController = new EventsController($this->mockEventsRepository, $this->mockView);
-        $eventsController->handleFindEventByPersonId($events->getPersonId());
-        $this->expectOutputString(sprintf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate()));
+        $this->assertNotNull($results);
     }
 
     /** @test */
-    public function TestHandleFindEventByDate_eventFound_byDate($date = null)
+    public function TestGetEventByPerson_id()
     {
-        $events = new Events(9, 2, 2017 - 12 - 12);
-        $this->mockEventsRepository->expects($this->atLeastOnce())
-            ->method('findEventById')
-            ->will($this->returnValue($events));
+        $person_id = 2;
 
-        $this->mockView->expects($this->atLeastOnce())
-            ->method('show')
-            ->will($this->returnCallback(function ($object) {
-                $events = $object['events'];
-                printf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate());
-            }));
+        $statement = $this->pdo->prepare('SELECT * from event WHERE person_id = ' . $person_id . ' ORDER BY date ASC');
+        $statement->execute();
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        $eventsController = new EventsController($this->mockEventsRepository, $this->mockView);
-        $eventsController->handleFindEventByPersonId($events->getDate());
-        $this->expectOutputString(sprintf('%d %d %s', $events->getId(), $events->getPersonId(), $events->getDate()));
+        $this->assertNotNull($results);
     }
+
+    /** @test */
+    public function TestGetEventById()
+    {
+        $id = 1;
+
+        $statement = $this->pdo->prepare('SELECT * from event WHERE id = ' . $id . ' ORDER BY date ASC');
+        $statement->execute();
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $this->assertNotNull($results);
+    }
+
+    public function TestGetAll()
+    {
+        $statement = $this->pdo->prepare('SELECT * from event WHERE ORDER BY date ASC');
+        $statement->execute();
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $this->assertNotNull($results);
+    }
+
+
 }
