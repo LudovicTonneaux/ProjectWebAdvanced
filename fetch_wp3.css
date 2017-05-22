@@ -17,7 +17,8 @@
 }
 
 #Post_Data:hover, #Get_Data:hover {
-    background-color: #3366FF;
+    background-color: #FFFFFF;
+    color: #69a5ff;
     cursor: pointer;
 }
 
