@@ -54,7 +54,6 @@ function get(){
         html += "</table>";
         document.getElementById("showEvents").innerHTML = html;
 
-
     }).catch(function (err) {
         console.log(err.message);
     });
