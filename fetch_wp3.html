@@ -10,19 +10,20 @@
 
 <body>
 
-<form onsubmit="post()">
-    Event name:<br>
-    <input type="text" name="name" id="name" value="WP3"><br>
-    Event date:<br>
-    <input type="text" name="date" id="date" value="2017-04-23"><br>
-    Person ID:<br>
-    <input type="text" name="id" id="id" value="1"><br>
-    <input type="submit" value="POST">
-</form>
+<div id="content">
+    <form onsubmit="post()">
+        Event name:<br>
+        <input type="text" name="name" id="name" value="WP3"><br>
+        Event date:<br>
+        <input type="text" name="date" id="date" value="2017-04-23"><br>
+        Person ID:<br>
+        <input type="text" name="id" id="id" value="1"><br>
+        <input type="submit" id="post" value="POST">
+    </form>
 
 
-<input type="button" onclick="get()" value="Get all events" />
-<div id="showEvents"></div>
-
+    <input type="button" onclick="get()" id="get" value="Get all events"/>
+    <div id="showEvents"></div>
+</div>
 </body>
 </html>

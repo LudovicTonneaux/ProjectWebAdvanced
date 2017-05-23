@@ -1,49 +1,35 @@
-#Post_Data {
-    margin-left: 40%;
-}
-
-#Get_Data {
-    margin-left: 5%;
-}
-
-#Post_Data, #Get_Data {
+#post, #get {
+    margin-top: 5px;
     background-color: #69a5ff;
     color: #FFFFFF;
     font-family: Calibri, sans-serif;
-    font-size: 22pt;
+    font-size: 15pt;
     border-radius: 8%;
     padding: 3px;
-    margin-top: 10%
+    display: inline-block;
+    height: auto;
+    width: 200px;
 }
 
-#Post_Data:hover, #Get_Data:hover {
+#post:hover, #get:hover {
     background-color: #FFFFFF;
     color: #69a5ff;
     cursor: pointer;
 }
 
-@media only screen and (min-width: 800px) and (max-width: 1200px) {
-    #Post_Data, #Get_Data {
-        margin-top: 20%;
-    }
+#name, #date, #id {
+    height: auto;
+    width: 200px;
 }
 
-@media only screen and (min-width: 400px) and (max-width: 800px) {
-    #Post_Data, #Get_Data {
-        font-size: 15pt;
-    }
-
-    #Get_Data {
-        margin-right: 8%;
-    }
+#content {
+    margin-top: 10%;
+    text-align: center;
+    font-family: Calibri, sans-serif;
 }
 
 @media only screen and (max-width: 400px) {
-    #Post_Data {
-        margin-left: 15%;
-    }
-
-    #Post_Data, #Get_Data {
-        font-size: 14pt;
+    #content {
+        margin-top: 25%;
     }
 }
