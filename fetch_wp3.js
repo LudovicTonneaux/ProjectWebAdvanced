@@ -29,9 +29,30 @@ function get(){
         var events = new Array();
 
         for (var i = 0; i < response2.length; i++) {
-            events.push(JSON.stringify(response2[i]));
+            events.push(response2[i]);
         }
 
+       var html = "<table><tr><th>ID</th><th>Name</th><th>Date</th><th>Person ID</th></tr>";
+
+        for (var i = 0; i < events.length; i++) {
+            html += "<tr>";
+            html += "<td>";
+            html += events[i].id;
+            html += "</td>";
+            html += "<td>";
+            html += events[i].name;
+            html += "</td>";
+            html += "<td>";
+            html += events[i].date;
+            html += "</td>";
+            html += "<td>";
+            html += events[i].person_id;
+            html += "</td>";
+            html += "</tr>";
+
+        }
+        html += "</table>";
+        document.getElementById("showEvents").innerHTML = html;
 
 
     }).catch(function (err) {
