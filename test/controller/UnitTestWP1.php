@@ -5,7 +5,7 @@ namespace controller;
 
 
 
-class EventsControllerTest extends PHPUnit\Framework\Testcase
+class UnitTestWP1 extends PHPUnit\Framework\Testcase
 {
     private $pdo = null;
 
