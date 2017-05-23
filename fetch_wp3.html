@@ -5,13 +5,23 @@
     <link href="fetch_wp3.css" rel="stylesheet">
     <title>wp3 Test</title>
 </head>
-<body>
-<Button id="Post_Data">Post Data</Button>
-<Button id="Get_Data">Get Data</Button>
-<br/>
-<table>
 
-</table>
 <script src="fetch_wp3.js"></script>
+
+<body>
+
+<form onsubmit="post()">
+    Event name:<br>
+    <input type="text" name="name" id="name" value="WP3"><br>
+    Event date:<br>
+    <input type="text" name="date" id="date" value="2017-04-23"><br>
+    Person ID:<br>
+    <input type="text" name="id" id="id" value="1"><br>
+    <input type="submit" value="POST">
+</form>
+
+<input type="button" onclick="get()" value="Get all events" />
+<div id="showEvents"></div>
+
 </body>
 </html>

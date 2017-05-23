@@ -1,33 +1,40 @@
-/**
- * Created by Davide Pavone on 19/05/2017.
- */
+function post(){
 
-document.getElementById("Post_Data").addEventListener("click", function () {
-    var request = new Request('http://192.168.118.148/~user/Project/ApiLudo.php?table=event&name=wp3&date=2045-02-03&person_id=1', {
+    var name = document.getElementById("name").value;
+    var date = document.getElementById("date").value;
+    var id = document.getElementById("id").value;
+
+    var requrl = "http://172.16.140.128/~user/ProjectWebAdvanced/ApiLudo.php?table=event&name=" + name + "&date=" + date + "&person_id=" + id;
+
+    var request = new Request(requrl, {
         method: 'POST'
     });
 
     fetch(request).catch(function (err) {
         console.log(err.message);
     });
+}
 
-//hier moet er een second of 2 pauze zijn zodat die post altijd wordt weergegeven
-});
+function get(){
 
-document.getElementById("Get_Data").addEventListener("click", function () {
-    var request = new Request('http://192.168.118.148/~user/Project/ApiLudo.php?table=event', {
+
+    var request = new Request('http://172.16.140.128/~user/ProjectWebAdvanced/ApiLudo.php?table=event', {
         method: 'GET'
     });
 
     fetch(request).then(function (response) {
         return response.json();
     }).then(function (response2) {
-        console.log('JSON: ', response2);
+
+        var events = new Array();
+
         for (var i = 0; i < response2.length; i++) {
-            console.log(response2[i]);
-            document.write(JSON.stringify(response2[i]));
+            events.push(JSON.stringify(response2[i]));
         }
+
+
+
     }).catch(function (err) {
         console.log(err.message);
     });
-})
+}
