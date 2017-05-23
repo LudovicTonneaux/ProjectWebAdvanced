@@ -109,8 +109,9 @@ class EventsControllerTest extends PHPUnit\Framework\Testcase
         $statement2 = $this->pdo->prepare('SELECT name FROM event WHERE id = ' . $id);
         $statement2->execute();
         $result = $statement2->fetchAll(PDO::FETCH_ASSOC);
+        $json = json_encode($result);
 
-        $this->assertEqual($name,$result);
+        $this->assertEqual($name,$json);
 
     }
 
@@ -157,8 +158,9 @@ class EventsControllerTest extends PHPUnit\Framework\Testcase
         $statement2 = $this->pdo->prepare('SELECT first_name FROM person  WHERE id = ' . $id);
         $statement2->execute();
         $result = $statement2->fetchAll(PDO::FETCH_ASSOC);
+        $json = json_encode($result);
 
-        $this->assertEqual($firstname,$result);
+        $this->assertEqual($firstname,$json);
 
     }
 
@@ -173,8 +175,9 @@ class EventsControllerTest extends PHPUnit\Framework\Testcase
         $statement2 = $this->pdo->prepare('SELECT last_name FROM person WHERE id = ' . $id);
         $statement2->execute();
         $result = $statement2->fetchAll(PDO::FETCH_ASSOC);
+        $json = json_encode($result);
 
-        $this->assertEqual($lastname,$result);
+        $this->assertEqual($lastname,$json);
 
     }
 
