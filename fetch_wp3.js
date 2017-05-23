@@ -4,7 +4,7 @@ function post(){
     var date = document.getElementById("date").value;
     var id = document.getElementById("id").value;
 
-    var requrl = "http://192.168.118.148/~user/Project/ApiLudo.php?table=event&name=" + name + "&date=" + date + "&person_id=" + id;
+    var requrl = "http://172.16.140.128/~user/ProjectWebAdvanced/ApiLudo.php?table=event&name=" + name + "&date=" + date + "&person_id=" + id;
 
     var request = new Request(requrl, {
         method: 'POST'
@@ -18,7 +18,7 @@ function post(){
 function get(){
 
 
-    var request = new Request('http://192.168.118.148/~user/Project/ApiLudo.php?table=event', {
+    var request = new Request('http://172.16.140.128/~user/ProjectWebAdvanced/ApiLudo.php?table=event', {
         method: 'GET'
     });
 

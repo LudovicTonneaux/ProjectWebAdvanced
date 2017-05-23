@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Connect>
     <Login>
-        <DatabaseName>projectWeb</DatabaseName>
-        <Username>pxluser</Username>
-        <Password>KKRuA3YFxIeQw!</Password>
-        <Hostname>localhost</Hostname>
-
-        <!--<DatabaseName>ProjectWebAdvanced</DatabaseName>-->
-        <!--<Username>root</Username>-->
-        <!--<Password>user</Password>-->
+        <!--<DatabaseName>projectWeb</DatabaseName>-->
+        <!--<Username>pxluser</Username>-->
+        <!--<Password>KKRuA3YFxIeQw!</Password>-->
         <!--<Hostname>localhost</Hostname>-->
+
+        <DatabaseName>ProjectWebAdvanced</DatabaseName>
+        <Username>root</Username>
+        <Password>user</Password>
+        <Hostname>localhost</Hostname>
     </Login>
 </Connect>
